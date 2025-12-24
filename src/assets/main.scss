@@ -1,0 +1,31 @@
+:root {
+  @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap');
+
+  /* --- ベースカラー --- */
+  --c-bg-app:     #161616; /* アプリ全体の背景 */
+  --c-bg-panel:   #232323; /* エディタのパネル背景 */
+  --c-bg-canvas:  #1d1d1d; /* グラフ描画エリアの背景 */
+  --c-border:     #3a3a3a; /* 枠線の色 */
+
+  --c-text:       #eeeeee; /* 文字色 */
+  --c-primary:    #00e5ff; /* シアン */
+  --c-secondary:  #ff0055; /* マゼンタ */
+  
+  /* --- 機能色 --- */
+  --c-guide:      rgba(255, 255, 255, 0.5); /* ガイド線の色 */
+  --c-grid:       rgba(255, 255, 255, 0.05); /* グリッド用 */
+}
+
+/* 全体のリセット設定 */
+body {
+  background-color: var(--c-bg-app);
+  color: var(--c-text);
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Fira Code', monospace;
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+}
