@@ -227,7 +227,8 @@
     min-height: 0;
 
     .graph-wrapper {
-      width: 96%; height: 96%;
+      width: auto; height: 96%;
+      max-width: 96%; max-height: 96%;
       aspect-ratio: 1 / 1;
       position: relative;
       touch-action: none;
