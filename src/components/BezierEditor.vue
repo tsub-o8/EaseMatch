@@ -294,15 +294,16 @@
     .answer-guide {
       stroke: var(--c-secondary);
       stroke-width: 3.2;
-      stroke-dasharray: 4 4; /* 点線 */
+      stroke-dasharray: 8 8; /* 点線 */
       opacity: 0.5;
       pointer-events: none;
     }
 
     .answer-handle {
       fill: var(--c-secondary);
+      r: 8;
       opacity: 0.5;
-      pointer-events: none; /* マウスで触れないようにする */
+      pointer-events: none;
     }     
 
     .debug-info {
