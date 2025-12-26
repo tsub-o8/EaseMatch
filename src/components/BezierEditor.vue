@@ -42,7 +42,14 @@
 
   // --- マウス操作ロジック ---
   const startDrag = (handleName: 'p1' | 'p2', event: PointerEvent) => {
-    (event.target as Element).setPointerCapture(event.pointerId);
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    if (event.target instanceof Element) {
+      event.target.setPointerCapture(event.pointerId);
+    }
+
     draggingHandle.value = handleName;
   };
   const stopDrag = () => { draggingHandle.value = null };
@@ -215,7 +222,7 @@
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     box-sizing: border-box;
     padding: 10px;
-    user-select: none;
+    user-select: none; touch-action: none;
 
     min-height: 0;
 
@@ -235,6 +242,7 @@
       border: none;
       overflow: visible;
       cursor: crosshair;
+      touch-action: none;
     }
 
     .base-line {

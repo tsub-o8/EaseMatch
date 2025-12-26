@@ -51,15 +51,15 @@
    // トラック
   .track-container {
     position: relative;
-    width: 85vw; height: 15vw;
-    max-width: 600px; max-height: 60px;
+    width: 85vw; height: 50px;
+    max-width: 600px;
     margin: 0 auto;
     z-index: 10;
   }
 
   // ボール共通設定
   .ball {
-    width: auto; height: 100%;
+    width: 50px; height: 50px;
     aspect-ratio: 1 / 1;
     border-radius: 50%; 
     position: absolute; top: 0; left: 0;
