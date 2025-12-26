@@ -121,7 +121,7 @@
   onUnmounted (() => {
     window.removeEventListener('pointermove', onPointerMove);
     window.removeEventListener('pointerup', stopDrag);
-    window.addEventListener('pointercancel', stopDrag);
+    window.removeEventListener('pointercancel', stopDrag);
   });
 </script>
 
@@ -227,9 +227,8 @@
     min-height: 0;
 
     .graph-wrapper {
-      width: auto; height: calc(100% - 0.6rem);
-      max-width: 100%; max-height: calc(100% - 0.6rem);
-      margin: 1rem;
+      width: 100%; height: 100%;
+      max-width: 100%; max-height: calc(100% - 4rem);
       aspect-ratio: 1 / 1;
       position: relative;
       touch-action: none;
@@ -254,13 +253,13 @@
 
     .main-curve {
       stroke: var(--c-text);
-      stroke-width: 2.5;
+      stroke-width: 4;
       fill: none;
       pointer-events: none;
     }
 
     .guide-line {
-      stroke-width: 1;
+      stroke-width: 3.2;
       opacity: 0.6;
       pointer-events: none;
       &.p1-guide {stroke: var(--c-primary);}
@@ -269,8 +268,10 @@
 
     .handle {
       cursor: grab;
-      stroke-width: 0;
+      stroke: transparent;
+      stroke-width: 16;
       transition: r 0.15s ease;
+      r: 8;
 
       &:hover {r: 10;}
       &:active{cursor: grabbing; r: 12;}
@@ -283,16 +284,16 @@
 
     .answer-curve {
       stroke: var(--c-secondary); /* 正解の色 */
-      stroke-width: 2;
+      stroke-width: 4;
       fill: none;
       opacity: 0.6;          /* 少し透けさせる */
-      stroke-dasharray: 5 5; /* 点線にする */
+      stroke-dasharray: 8 8; /* 点線にする */
       pointer-events: none;
     }
 
     .answer-guide {
       stroke: var(--c-secondary);
-      stroke-width: 1;
+      stroke-width: 3.2;
       stroke-dasharray: 4 4; /* 点線 */
       opacity: 0.5;
       pointer-events: none;

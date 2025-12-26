@@ -265,7 +265,7 @@
 
 <style lang="scss" scoped>
 .game-view {
-  width: 100%; height: 100vh;
+  width: 100%; height: 100dvh;
   overflow: hidden;
   display: flex; flex-direction: column;
   background: var(--c-bg-app);
@@ -328,11 +328,16 @@
 
 //　ツールバー
 .tool-bar {
-  height: 80px;
+  height: 72px;
   flex-shrink: 0;
   background: var(--c-bg-panel);
   // border-bottom: 1px solid var(--c-guide);
   display: flex; align-items: center; justify-content: center; gap: 20px;
+
+  @media (max-width: 600px) {
+    height: 60px;
+    gap: 15px;
+  }
 }
 
 .tool-btn {
@@ -345,27 +350,26 @@
 }
 
 .play-svg {
-  width: 32px; height: 32px;
+  width: 50%; height: 50%;
   fill: currentColor;
 }
 
 .icon-svg {
-  width: 27px; height: 27px;
+  width: 50%; height: 50%;
   fill: currentColor;
 }
 
-/* Playボタン (控えめ) */
+/* Playボタン  */
 .play-btn {
-  width: 60px; height: 60px;
+  width: 4rem; height: 4rem;
   background: transparent; border: none; color: var(--c-text);
   padding: 0;
   gap: 8px;
-  &:hover:not(:disabled) { border-color: var(--c-text); background: rgba(255,255,255,0.05); }
 }
 
-/* Matchボタン (横長の長方形・目立つ) */
+/* Matchボタン */
 .match-btn {
-  width: 50px; height: 50px;
+  width: 3rem; height: 3rem;
   background: var(--c-text); color: #000;
   padding: 0;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
