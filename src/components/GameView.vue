@@ -269,6 +269,8 @@
   overflow: hidden;
   display: flex; flex-direction: column;
   background: var(--c-bg-app);
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /* --- エリア定義 --- */
@@ -302,7 +304,7 @@
 }
 
 .preview-area {
-  flex: 5;
+  flex: 4;
   min-height: 0;
   background: var(--c-bg-app);
   position: relative;
