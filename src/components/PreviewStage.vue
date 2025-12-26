@@ -51,19 +51,20 @@
    // トラック
   .track-container {
     position: relative;
-    width: 600px;
-    max-width: 90%;
-    height: 60px;
+    width: 85vw; height: 15vw;
+    max-width: 600px; max-height: 60px;
+    margin: 0 auto;
     z-index: 10;
   }
 
   // ボール共通設定
   .ball {
-    width: 60px; height: 60px;
+    width: auto; height: 100%;
+    aspect-ratio: 1 / 1;
     border-radius: 50%; 
     position: absolute; top: 0; left: 0;
 
-    will-change: transform;
+    will-change: left, transform;
     transform: translateX(0);
 
     box-sizing: border-box;
@@ -71,7 +72,8 @@
 
     &.moved { 
       transition-duration: 1000ms; 
-      transform: translateX(calc(600px - 60px));
+      left: 100%;
+      transform: translateX(-100%);
     }
   }
 

@@ -41,11 +41,17 @@
   };
 
   // --- マウス操作ロジック ---
-  const startDrag = (handleName: 'p1' | 'p2') => { draggingHandle.value = handleName; };
+  const startDrag = (handleName: 'p1' | 'p2', event: PointerEvent) => {
+    (event.target as Element).setPointerCapture(event.pointerId);
+    draggingHandle.value = handleName;
+  };
   const stopDrag = () => { draggingHandle.value = null };
 
-  const onMouseMove = (event: MouseEvent) => {
+  const onPointerMove = (event: PointerEvent) => {
     if (!draggingHandle.value || !svgRef.value) return;
+
+    event.preventDefault();
+
     const rect = svgRef.value.getBoundingClientRect();
 
     // 画面上の1pxが、SVG内部の何単位に相当するか（スケール比率）を計算
@@ -98,15 +104,17 @@
 
   // --- ライフサイクル ---
   onMounted (() => {
-    window.addEventListener('mousemove', onMouseMove);
-    window.addEventListener('mouseup', stopDrag);
+    window.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerup', stopDrag);
+    window.addEventListener('pointercancel', stopDrag);
     
     emitUpdate();
   });
   
   onUnmounted (() => {
-    window.removeEventListener('mousemove', onMouseMove);
-    window.removeEventListener('mouseup', stopDrag);
+    window.removeEventListener('pointermove', onPointerMove);
+    window.removeEventListener('pointerup', stopDrag);
+    window.addEventListener('pointercancel', stopDrag);
   });
 </script>
 
@@ -158,13 +166,13 @@
           :cx="toSvgX(p1.x)" :cy="toSvgY(p1.y)"
           r="6"
           class="handle p1"
-          @mousedown.prevent="startDrag('p1')"
+          @pointerdown.prevent="startDrag('p1', $event)"
         />
         <circle
           :cx="toSvgX(p2.x)" :cy="toSvgY(p2.y)"
           r="6"
           class="handle p2"
-          @mousedown.prevent="startDrag('p2')"
+          @pointerdown.prevent="startDrag('p2', $event)"
         />
 
         <!-- 正解のハンドル -->
@@ -217,6 +225,7 @@
       margin: 1rem;
       aspect-ratio: 1 / 1;
       position: relative;
+      touch-action: none;
     }
 
     .bezier-svg {
@@ -252,11 +261,13 @@
 
     .handle {
       cursor: grab;
-      stroke-width: 2.5;
+      stroke-width: 0;
       transition: r 0.15s ease;
 
-      &:hover {r: 8; stroke-width: 3;}
-      &:active{cursor: grabbing; r: 10;}
+      &:hover {r: 10;}
+      &:active{cursor: grabbing; r: 12;}
+
+      touch-action: none;
 
       &.p1 {fill: var(--c-primary);}
       &.p2 {fill: var(--c-secondary);}
