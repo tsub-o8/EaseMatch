@@ -328,14 +328,14 @@
 
 //　ツールバー
 .tool-bar {
-  height: 72px;
+  height: 80px;
   flex-shrink: 0;
   background: var(--c-bg-panel);
   // border-bottom: 1px solid var(--c-guide);
   display: flex; align-items: center; justify-content: center; gap: 20px;
 
   @media (max-width: 600px) {
-    height: 60px;
+    height: 72px;
     gap: 15px;
   }
 }

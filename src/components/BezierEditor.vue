@@ -208,10 +208,10 @@
           </g>
       </svg>
 
-      <div class="debug-info">
+      <!-- <div class="debug-info">
         <span class="label">cubic-bezier</span>
         <span class="val">{{ p1.x.toFixed(2) }}, {{ p1.y.toFixed(2) }}, {{ p2.x.toFixed(2) }}, {{ p2.y.toFixed(2) }}</span>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -227,8 +227,7 @@
     min-height: 0;
 
     .graph-wrapper {
-      width: 100%; height: 100%;
-      max-width: 100%; max-height: calc(100% - 4rem);
+      width: 95%; height: 95%;
       aspect-ratio: 1 / 1;
       position: relative;
       touch-action: none;
