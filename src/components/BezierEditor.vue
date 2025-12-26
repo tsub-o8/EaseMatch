@@ -112,89 +112,91 @@
 
 <template>
   <div class="editor-container">
-    <svg
-      ref="svgRef"
-      :viewBox="`0 0 ${size + padding * 2} ${size + padding * 2}`"
-      class="bezier-svg"
-    >
-      <defs>
-        <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
-          <path d="M 50 0 L 0 0 0 50" fill="none" stroke="var(--c-grid)" stroke-width="1"/>
-        </pattern>
-      </defs>
+    <div class="graph-wrapper">
+      <svg
+        ref="svgRef"
+        :viewBox="`0 0 ${size + padding * 2} ${size + padding * 2}`"
+        class="bezier-svg"
+      >
+        <defs>
+          <pattern id="grid" width="50" height="50" patternUnits="userSpaceOnUse">
+            <path d="M 50 0 L 0 0 0 50" fill="none" stroke="var(--c-grid)" stroke-width="1"/>
+          </pattern>
+        </defs>
 
-      <rect x="0" y="0" width="100%" height="100%" fill="url(#grid)" style="pointer-events: none;"/>
+        <rect x="0" y="0" width="100%" height="100%" fill="url(#grid)" style="pointer-events: none;"/>
 
-      <line x1="0" :y1="toSvgY(0)" x2="100%" :y2="toSvgY(0)" class="base-line" />
-      <line x1="0" :y1="toSvgY(1)" x2="100%" :y2="toSvgY(1)" class="base-line" />
+        <line x1="0" :y1="toSvgY(0)" x2="100%" :y2="toSvgY(0)" class="base-line" />
+        <line x1="0" :y1="toSvgY(1)" x2="100%" :y2="toSvgY(1)" class="base-line" />
 
-      <!-- 自分のカーブ -->
-      <path
-        :d="pathString"
-        class="main-curve"
-      />
+        <!-- 自分のカーブ -->
+        <path
+          :d="pathString"
+          class="main-curve"
+        />
 
-      <!-- 正解のカーブ -->
-      <path 
-        v-if="answerPathString" 
-        :d="answerPathString" 
-        class="answer-curve"
-      />
+        <!-- 正解のカーブ -->
+        <path 
+          v-if="answerPathString" 
+          :d="answerPathString" 
+          class="answer-curve"
+        />
 
-      <!-- 自分のハンドル -->
-      <line
-        :x1="toSvgX(0)" :y1="toSvgY(0)"
-        :x2="toSvgX(p1.x)" :y2="toSvgY(p1.y)"
-        class="guide-line p1-guide"
-      />
-      <line
-        :x1="toSvgX(1)" :y1="toSvgY(1)"
-        :x2="toSvgX(p2.x)" :y2="toSvgY(p2.y)"
-        class="guide-line p2-guide"
-      />
-
-      <circle
-        :cx="toSvgX(p1.x)" :cy="toSvgY(p1.y)"
-        r="6"
-        class="handle p1"
-        @mousedown.prevent="startDrag('p1')"
-      />
-      <circle
-        :cx="toSvgX(p2.x)" :cy="toSvgY(p2.y)"
-        r="6"
-        class="handle p2"
-        @mousedown.prevent="startDrag('p2')"
-      />
-
-      <!-- 正解のハンドル -->
-      <g v-if="props.answer">
+        <!-- 自分のハンドル -->
         <line
           :x1="toSvgX(0)" :y1="toSvgY(0)"
-          :x2="toSvgX(props.answer[0])" :y2="toSvgY(props.answer[1])"
-          class="answer-guide"
+          :x2="toSvgX(p1.x)" :y2="toSvgY(p1.y)"
+          class="guide-line p1-guide"
         />
         <line
           :x1="toSvgX(1)" :y1="toSvgY(1)"
-          :x2="toSvgX(props.answer[2])" :y2="toSvgY(props.answer[3])"
-          class="answer-guide"
+          :x2="toSvgX(p2.x)" :y2="toSvgY(p2.y)"
+          class="guide-line p2-guide"
         />
 
         <circle
-          :cx="toSvgX(props.answer[0])" :cy="toSvgY(props.answer[1])"
+          :cx="toSvgX(p1.x)" :cy="toSvgY(p1.y)"
           r="6"
-          class="answer-handle"
+          class="handle p1"
+          @mousedown.prevent="startDrag('p1')"
         />
         <circle
-          :cx="toSvgX(props.answer[2])" :cy="toSvgY(props.answer[3])"
+          :cx="toSvgX(p2.x)" :cy="toSvgY(p2.y)"
           r="6"
-          class="answer-handle"
+          class="handle p2"
+          @mousedown.prevent="startDrag('p2')"
         />
-        </g>
-    </svg>
 
-    <div class="debug-info">
-      <span class="label">cubic-bezier</span>
-      <span class="val">{{ p1.x.toFixed(2) }}, {{ p1.y.toFixed(2) }}, {{ p2.x.toFixed(2) }}, {{ p2.y.toFixed(2) }}</span>
+        <!-- 正解のハンドル -->
+        <g v-if="props.answer">
+          <line
+            :x1="toSvgX(0)" :y1="toSvgY(0)"
+            :x2="toSvgX(props.answer[0])" :y2="toSvgY(props.answer[1])"
+            class="answer-guide"
+          />
+          <line
+            :x1="toSvgX(1)" :y1="toSvgY(1)"
+            :x2="toSvgX(props.answer[2])" :y2="toSvgY(props.answer[3])"
+            class="answer-guide"
+          />
+
+          <circle
+            :cx="toSvgX(props.answer[0])" :cy="toSvgY(props.answer[1])"
+            r="6"
+            class="answer-handle"
+          />
+          <circle
+            :cx="toSvgX(props.answer[2])" :cy="toSvgY(props.answer[3])"
+            r="6"
+            class="answer-handle"
+          />
+          </g>
+      </svg>
+
+      <div class="debug-info">
+        <span class="label">cubic-bezier</span>
+        <span class="val">{{ p1.x.toFixed(2) }}, {{ p1.y.toFixed(2) }}, {{ p2.x.toFixed(2) }}, {{ p2.y.toFixed(2) }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -209,10 +211,16 @@
 
     min-height: 0;
 
-    .bezier-svg {
-      width: auto; height: auto;
-      max-width: 100%; max-height: calc(100% - 30px);
+    .graph-wrapper {
+      width: auto; height: calc(100% - 0.6rem);
+      max-width: 100%; max-height: calc(100% - 0.6rem);
+      margin: 1rem;
       aspect-ratio: 1 / 1;
+      position: relative;
+    }
+
+    .bezier-svg {
+      width: 100%; height: 100%;
       display: block;
       background: transparent;
       border: none;
@@ -278,13 +286,14 @@
     }     
 
     .debug-info {
+      position: absolute;
+      top: 100%; left: 0;
+      width: 100%;
       margin-top: 15px;
-      font-size: 11px;
+      font-size: 0.6rem;
       letter-spacing: 0.05em;
       color: var(--c-guide);
-      display: flex;
-      justify-content: space-between;
-      width: 100%;
+      display: flex; justify-content: space-between;
 
       .val {
         color: var(--c-primary);

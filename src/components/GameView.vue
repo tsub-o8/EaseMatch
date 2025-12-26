@@ -233,25 +233,26 @@
       />
 
       <div class="score-bar">
-        <span class="score-label" v-if="score !== null">Your Score</span>
+        <span class="score-label" v-if="score !== null">Match Rate</span>
         <span class="score-val" v-if="score !== null">{{ displayScore }}<small>%</small></span>
       </div>
     </div>
     
 
     <div class="tool-bar">
-      <button class="tool-btn play-btn" @click="playUser" :disabled="isAnimating">
-        <span class="icon">▶︎</span>Play
+      <button class="tool-btn play-btn" @click="playUser" :disabled="isAnimating" title="Play">
+        <svg viewBox="0 0 24 24" class="play-svg">
+          <path d="M8 5v14l11-7z" />
+        </svg>
       </button>
-
-      <button
-        class="tool-btn match-btn"
-        :class="{ 'is-next': score !== null }"
-        :disabled="isMatching && score === null"
-        @click="handleMainAction"
-      >
-        <span v-if="score === null">Match</span>
-        <span v-else>Next</span>
+      <button class="tool-btn match-btn" :class="{ 'is-next': score !== null }" :disabled="isAnimating && score === null" @click="handleMainAction">
+        <svg v-if="score === null" viewBox="0 0 24 24" class="icon-svg">
+          <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+        </svg>
+        
+        <svg v-else viewBox="0 0 24 24" class="icon-svg">
+          <path d="M4 12h12.17l-3.59 3.59L14 17l6-6-6-6-1.41 1.41L16.17 10H4v2z" />
+        </svg>
       </button>
     </div>
 
@@ -301,7 +302,7 @@
 }
 
 .preview-area {
-  flex: 4;
+  flex: 5;
   min-height: 0;
   background: var(--c-bg-app);
   position: relative;
@@ -327,17 +328,15 @@
 
 //　ツールバー
 .tool-bar {
-  height: 70px;
+  height: 80px;
   flex-shrink: 0;
   background: var(--c-bg-panel);
+  // border-bottom: 1px solid var(--c-guide);
   display: flex; align-items: center; justify-content: center; gap: 20px;
-  border-top: 1px solid var(--c-border);
-  border-bottom: 1px solid var(--c-border);
 }
 
 .tool-btn {
-  height: 44px;
-  border: none; border-radius: 4px;
+  border: none; border-radius: 50%;
   font-family: inherit; font-weight: bold; font-size: 1rem;
   cursor: pointer; transition: all 0.2s;
   display: flex; align-items: center; justify-content: center;
@@ -345,18 +344,30 @@
   &:disabled { opacity: 0.5; cursor: not-allowed; }
 }
 
+.play-svg {
+  width: 32px; height: 32px;
+  fill: currentColor;
+}
+
+.icon-svg {
+  width: 27px; height: 27px;
+  fill: currentColor;
+}
+
 /* Playボタン (控えめ) */
 .play-btn {
-  background: transparent; border: 1px solid var(--c-guide); color: var(--c-text);
-  padding: 0 30px;
+  width: 60px; height: 60px;
+  background: transparent; border: none; color: var(--c-text);
+  padding: 0;
   gap: 8px;
   &:hover:not(:disabled) { border-color: var(--c-text); background: rgba(255,255,255,0.05); }
 }
 
 /* Matchボタン (横長の長方形・目立つ) */
 .match-btn {
+  width: 50px; height: 50px;
   background: var(--c-text); color: #000;
-  padding: 0 60px; /* 横長にする */
+  padding: 0;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   
   &:hover:not(:disabled) {
@@ -378,7 +389,6 @@
   flex: 5;
   min-height: 0;
   padding: 10px;
-  min-height: 300px;
   background: var(--c-bg-canvas);
   display: flex; align-items: center; justify-content: center;
   position: relative;
