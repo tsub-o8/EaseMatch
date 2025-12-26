@@ -227,7 +227,7 @@
     min-height: 0;
 
     .graph-wrapper {
-      width: 95%; height: 95%;
+      width: 96%; height: 96%;
       aspect-ratio: 1 / 1;
       position: relative;
       touch-action: none;
@@ -245,20 +245,20 @@
 
     .base-line {
       stroke: var(--c-text);
-      stroke-width: 1;
+      stroke-width: 1px;
       opacity: 0.2;
       pointer-events: none;
     }
 
     .main-curve {
       stroke: var(--c-text);
-      stroke-width: 4;
+      stroke-width: 4px;
       fill: none;
       pointer-events: none;
     }
 
     .guide-line {
-      stroke-width: 3.2;
+      stroke-width: 3.2px;
       opacity: 0.6;
       pointer-events: none;
       &.p1-guide {stroke: var(--c-primary);}
@@ -268,12 +268,12 @@
     .handle {
       cursor: grab;
       stroke: transparent;
-      stroke-width: 16;
+      stroke-width: 16px;
       transition: r 0.15s ease;
-      r: 8;
+      r: 8px;
 
-      &:hover {r: 10;}
-      &:active{cursor: grabbing; r: 12;}
+      &:hover {r: 10px;}
+      &:active{cursor: grabbing; r: 12px;}
 
       touch-action: none;
 
@@ -283,24 +283,24 @@
 
     .answer-curve {
       stroke: var(--c-secondary); /* 正解の色 */
-      stroke-width: 4;
+      stroke-width: 4px;
       fill: none;
       opacity: 0.6;          /* 少し透けさせる */
-      stroke-dasharray: 8 8; /* 点線にする */
+      stroke-dasharray: 8px 8px; /* 点線にする */
       pointer-events: none;
     }
 
     .answer-guide {
       stroke: var(--c-secondary);
-      stroke-width: 3.2;
-      stroke-dasharray: 8 8; /* 点線 */
+      stroke-width: 3.2px;
+      stroke-dasharray: 8px 8px; /* 点線 */
       opacity: 0.5;
       pointer-events: none;
     }
 
     .answer-handle {
       fill: var(--c-secondary);
-      r: 8;
+      r: 8px;
       opacity: 0.5;
       pointer-events: none;
     }     
