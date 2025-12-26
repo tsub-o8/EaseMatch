@@ -335,7 +335,7 @@
   display: flex; align-items: center; justify-content: center; gap: 20px;
 
   @media (max-width: 600px) {
-    height: 72px;
+    height: 60px;
     gap: 15px;
   }
 }
@@ -365,6 +365,9 @@
   background: transparent; border: none; color: var(--c-text);
   padding: 0;
   gap: 8px;
+  @media (max-width: 600px) {
+    width: 3rem; height: 3rem;
+  }
 }
 
 /* Matchボタン */
@@ -378,6 +381,10 @@
     transform: translateY(-2px);
     box-shadow: 0 6px 15px rgba(0,0,0,0.4);
     background: #fff;
+  }
+
+  @media (max-width: 600px) {
+    width: 2.25rem; height: 2.25rem;
   }
 }
 
