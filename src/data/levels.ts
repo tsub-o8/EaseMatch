@@ -9,26 +9,62 @@ export interface Level {
 export const levels: Level[] = [
   { 
     id: 1, 
-    title: 'Ease In', 
-    description: 'ゆっくり動き出し、加速して終わる',
-    answer: [0.42, 0.0, 1.0, 1.0] 
+    title: "Ease",
+    description: "自然な加速と減速。",
+    answer: [0.25, 0.0, 0.75, 1.0]
   },
   { 
     id: 2, 
-    title: 'Ease Out', 
-    description: '速く動き出し、ゆっくり止まる',
-    answer: [0.0, 0.0, 0.58, 1.0] 
+    title: "Ease In",
+    description: "ゆっくり始まって加速する。",
+    answer: [0.4, 0.0, 1.0, 0.6]
   },
   { 
     id: 3, 
-    title: 'Ease In Out', 
-    description: '滑らかに加速し、滑らかに減速する',
-    answer: [0.42, 0.0, 0.58, 1.0] 
+    title: "Ease Out",
+    description: "素早く登場し、ふわりと着地する。",
+    answer: [0.0, 0.4, 0.6, 1.0]
   },
   { 
     id: 4, 
-    title: 'Bouncy', 
-    description: '勢いよく飛び出し、バウンドするように止まる',
-    answer: [0.17, 0.67, 0.83, 0.67] 
+    title: "Sharp Switch",
+    description: "キレのある動き。中間を一瞬で駆け抜ける。",
+    answer: [0.8, 0.0, 0.2, 1.0]
+  },
+  { 
+    id: 5, 
+    title: "Material UI",
+    description: "モダンなアプリの挙動。反応は早く、余韻は長く。",
+    answer: [0.2, 0.0, 0.2, 1.0]
+  },
+  { 
+    id: 6, 
+    title: "Anticipation",
+    description: "一度後ろに下がって勢いをつける。",
+    answer: [0.3, -0.3, 1.0, 0.3]
+  },
+  { 
+    id: 7, 
+    title: "Overshoot",
+    description: "勢いあまって通り過ぎ、少し戻ってくる。",
+    answer: [0.0, 0.7, 0.7, 1.3]
+  },
+  { 
+    id: 8, 
+    title: "Sticky",
+    description: "粘り気のある動き。ギリギリまで動かない。",
+    answer: [1.0, 0.0, 0.8, 1]
+  },
+  { 
+    id: 9, 
+    title: "Gentle Sine",
+    description: "主張しない、穏やかで柔らかい波のような動き。",
+    answer: [0.45, 0.05, 0.55, 0.95]
+  },
+  { 
+    id: 10, 
+    title: "Elastic Snap",
+    description: "大きく引いて、強烈に弾けるゴムのような動き。",
+    answer: [0.7, -0.3, 0.3, 1.3]
   },
 ];
